@@ -1,6 +1,17 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:myflutter_training_task/Module8/SignIn.dart';
+import 'package:myflutter_training_task/Module8/Auth/HomeScreen.dart';
+import 'package:myflutter_training_task/Module8/Auth/Login_With_google.dart';
+import 'package:myflutter_training_task/Module8/Auth/PhoneAuth.dart';
+import 'package:myflutter_training_task/Module8/Auth/ResetPassword.dart';
+import 'package:myflutter_training_task/Module8/Auth/SignIn.dart';
+import 'package:myflutter_training_task/Module8/Auth/SignUp.dart';
+import 'package:myflutter_training_task/Module8/Auth/otpScreen.dart';
+import 'package:myflutter_training_task/Module8/FireStoreDatabse/AddTask_Screen.dart';
+import 'package:myflutter_training_task/Module8/FireStoreDatabse/ViewTask_Screen.dart';
+import 'package:myflutter_training_task/Module8/RealTimeDatabase/addTask.dart';
+import 'package:myflutter_training_task/Module8/RealTimeDatabase/viewTask.dart';
 import 'firebase_options.dart';
 import 'package:myflutter_training_task/Module5/Card.dart';
 import 'package:myflutter_training_task/Module5/Container.dart';
@@ -45,9 +56,27 @@ import 'package:myflutter_training_task/Module7/switch.dart';
 
 void main() async {
    WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
+   if(kIsWeb)
+  {
+    await Firebase.initializeApp(
+   options:  FirebaseOptions(
+   apiKey: "AIzaSyCX5ZY_k-Y-hrr1bKJcUxBtrs1zo-4vPz0",
+   authDomain: "my-flutter-training-efb19.firebaseapp.com",
+   projectId: "my-flutter-training-efb19",
+   storageBucket: "my-flutter-training-efb19.appspot.com",
+   messagingSenderId: "970668995057",
+   appId: "1:970668995057:web:1c798c9ba2066696da9450",
+   measurementId: "G-PV9N6RV4W1"
+   )
+  );
+  }
+  else{
+     await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-);
+  );
+
+  }
+ 
   runApp(const MyApp());
 }
 final GoRouter _router = GoRouter(
@@ -76,27 +105,13 @@ class MyApp extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter tutorial',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: SignIn(),
+      home: phoneAuth(),
       routes: {
         "/first":(context) => HomeScreen(),
         "/second":(context) => SettingScreeen(),

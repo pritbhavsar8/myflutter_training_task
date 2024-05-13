@@ -39,6 +39,15 @@ dependencies:
   go_router: ^14.0.1
   intl: ^0.17.0
   firebase_core:
+  firebase_auth:
+  google_sign_in:
+  shared_preferences:
+  pinput:
+  cloud_firestore:
+  firebase_storage:
+  image_picker:
+  uuid:
+  firebase_database: ^10.5.5
 
 dev_dependencies:
   flutter_test:
