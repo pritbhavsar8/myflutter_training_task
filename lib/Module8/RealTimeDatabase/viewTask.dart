@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:myflutter_training_task/Module8/RealTimeDatabase/addTask.dart';
+import 'package:myflutter_training_task/Module8/RealTimeDatabase/editTask.dart';
 
 class viewTask extends StatefulWidget {
   const viewTask({super.key});
@@ -36,20 +37,34 @@ class _viewTaskState extends State<viewTask> {
            return ListView.builder(
             itemCount: snapshot.data!.snapshot.children.length,        
             itemBuilder:(context, index) {
-              return Container(
-                width: 40.0,
-                child: ListTile( 
-                  title:    Text('Title: ${list[index]["title"]}'),
-                  subtitle: Text('Remark: ${list[index]["remark"]}'),
-                  trailing: Text('ID: ${list[index]["id"]}'),
-                  leading: IconButton(
-                    onPressed: ()async{
-                      // await FirebaseDatabase.instance.ref("Notes").child(snapshot.child("id").value.toString()).remove();
-                    },
-                    icon: Icon(Icons.delete),
-                  ),
-                  onLongPress: (){},
+              return ListTile( 
+                title:    Text('Title: ${list[index]["title"]}'),
+                subtitle: Text('Remark: ${list[index]["remark"]}'),
+                trailing: Text('ID: ${list[index]["id"]}'),
+                leading: IconButton(
+                  onPressed: ()async{
+                    var id = list[index]["id"];
+                    FirebaseDatabase.instance.ref("Notes").child(id).remove().then((value){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("delete task sucessfully"),
+                          backgroundColor: Colors.green,
+                          duration: Duration(seconds: 3),
+                        )
+                      );
+                    });
+                  },
+                  icon: Icon(Icons.delete,color: Colors.red,),
                 ),
+                onLongPress: (){
+                   var updateid = list[index]["id"];
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => editTask(
+                     updateId:updateid,
+              
+                    ),)
+                  );
+                },
               );
              },
           );

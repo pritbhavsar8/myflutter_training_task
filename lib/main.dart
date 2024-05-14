@@ -10,6 +10,7 @@ import 'package:myflutter_training_task/Module8/Auth/SignUp.dart';
 import 'package:myflutter_training_task/Module8/Auth/otpScreen.dart';
 import 'package:myflutter_training_task/Module8/FireStoreDatabse/AddTask_Screen.dart';
 import 'package:myflutter_training_task/Module8/FireStoreDatabse/ViewTask_Screen.dart';
+import 'package:myflutter_training_task/Module8/RealTimeDatabase/ChatScreen.dart';
 import 'package:myflutter_training_task/Module8/RealTimeDatabase/addTask.dart';
 import 'package:myflutter_training_task/Module8/RealTimeDatabase/viewTask.dart';
 import 'firebase_options.dart';
@@ -111,7 +112,7 @@ class MyApp extends StatelessWidget
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: phoneAuth(),
+      home: ChatScreen(),
       routes: {
         "/first":(context) => HomeScreen(),
         "/second":(context) => SettingScreeen(),
