@@ -12,10 +12,10 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
    var formkey = GlobalKey<FormState>();
-  TextEditingController _email = TextEditingController();
-  TextEditingController _password = TextEditingController();
+   TextEditingController _email = TextEditingController();
+   TextEditingController _password = TextEditingController();
    FirebaseAuth auth = FirebaseAuth.instance;
-
+   String emailPattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,8 +47,7 @@ class _SignUpState extends State<SignUp> {
                   {
                     return "Please Enter email address";
                   }
-                  else if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value))
-
+                  else if(!RegExp(emailPattern).hasMatch(value))
                   {
                     return "Please Enter valid email address";
                   }
@@ -62,6 +61,7 @@ class _SignUpState extends State<SignUp> {
                 child: TextFormField(
                   keyboardType: TextInputType.emailAddress,
                   controller: _password,
+                  obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(11.0),
@@ -100,7 +100,14 @@ class _SignUpState extends State<SignUp> {
                       auth.createUserWithEmailAndPassword(
                         email:email ,
                         password: password
-                      ).then((value){
+                      ).then((value) async{
+                        await ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("signUp Sucessfully"),
+                            backgroundColor: Colors.green,
+                            duration: Duration(seconds: 2),
+                          )
+                        );
                         setState(() {
                         _email.text = "";
                         _password.text= "";

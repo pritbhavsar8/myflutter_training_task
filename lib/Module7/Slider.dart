@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; // custom slider mate syncfusion_flutter_slider pakage use karvu
 
 class slider extends StatefulWidget {
   const slider({super.key});
@@ -22,6 +22,7 @@ class _sliderState extends State<slider> {
       //       thumbColor: Colors.brown,
       //       label: "Volume Up",
       //       divisions: 5, 
+      
       //       onChanged: (value) {
       //         setState(() {
       //           defaultValue = value;

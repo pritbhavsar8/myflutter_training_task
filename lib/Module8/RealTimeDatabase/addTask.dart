@@ -73,8 +73,9 @@ class _addTaskState extends State<addTask> {
                   );
                   setState(() {
                     _title.text ="";
-                  _remark.text= "";
+                   _remark.text= "";
                   });
+                  Navigator.of(context).pop();
                   Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => viewTask(),)
                 );

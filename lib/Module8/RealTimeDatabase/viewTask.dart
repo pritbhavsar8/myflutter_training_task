@@ -29,6 +29,7 @@ class _viewTaskState extends State<viewTask> {
         stream: FirebaseDatabase.instance.ref("Notes").onValue,
         builder: (context,AsyncSnapshot<DatabaseEvent> snapshot) {
          if (snapshot.hasData) {
+          
           Map<dynamic,dynamic> map = snapshot.data!.snapshot.value as dynamic;
           List<dynamic> list =[];
           list.clear();
@@ -37,34 +38,36 @@ class _viewTaskState extends State<viewTask> {
            return ListView.builder(
             itemCount: snapshot.data!.snapshot.children.length,        
             itemBuilder:(context, index) {
-              return ListTile( 
-                title:    Text('Title: ${list[index]["title"]}'),
-                subtitle: Text('Remark: ${list[index]["remark"]}'),
-                trailing: Text('ID: ${list[index]["id"]}'),
-                leading: IconButton(
-                  onPressed: ()async{
-                    var id = list[index]["id"];
-                    FirebaseDatabase.instance.ref("Notes").child(id).remove().then((value){
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("delete task sucessfully"),
-                          backgroundColor: Colors.green,
-                          duration: Duration(seconds: 3),
-                        )
-                      );
-                    });
+              return SingleChildScrollView(
+                child: ListTile( 
+                  title:    Text('Title: ${list[index]["title"]}'),
+                  subtitle: Text('Remark: ${list[index]["remark"]}'),
+                  trailing: Text('ID: ${list[index]["id"]}'),
+                  leading: IconButton(
+                    onPressed: ()async{
+                      var id = list[index]["id"];
+                      FirebaseDatabase.instance.ref("Notes").child(id).remove().then((value){
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("delete task sucessfully"),
+                            backgroundColor: Colors.green,
+                            duration: Duration(seconds: 3),
+                          )
+                        );
+                      });
+                    },
+                    icon: Icon(Icons.delete,color: Colors.red,),
+                  ),
+                  onLongPress: (){
+                     var updateid = list[index]["id"];
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => editTask(
+                       updateId:updateid,
+                
+                      ),)
+                    );
                   },
-                  icon: Icon(Icons.delete,color: Colors.red,),
                 ),
-                onLongPress: (){
-                   var updateid = list[index]["id"];
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => editTask(
-                     updateId:updateid,
-              
-                    ),)
-                  );
-                },
               );
              },
           );

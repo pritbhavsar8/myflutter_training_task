@@ -36,8 +36,10 @@ class _homescreenState extends State<homescreen> {
       appBar: AppBar(
         title: Text("Home"),
         actions: [
-          IconButton(onPressed: (){
-            auth.signOut().then((value){
+          IconButton(onPressed: () async{
+           SharedPreferences preferences = await SharedPreferences.getInstance();
+           preferences.clear(); 
+           await auth.signOut().then((value){
                Navigator.of(context).push(
                MaterialPageRoute(builder: (context) => SignIn(),)
             );

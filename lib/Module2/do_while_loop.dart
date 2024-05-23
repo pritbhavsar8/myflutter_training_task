@@ -3,18 +3,11 @@ import 'dart:math';
 
 void main(){
    int choice;
-  
+
   do {
-    // Displaying the menu
     displayMenu();
-
-    // Getting user input
-    stdout.write("Enter your choice: ");
-    String? input = stdin.readLineSync();
-    
-    // Parsing user input
-    choice = int.tryParse(input ?? '') ?? 0;
-
+     stdout.write("Enter your choice: ");
+     choice = int.parse(stdin.readLineSync()!);
     // Handling user choice
     switch (choice) {
       case 1:
@@ -27,12 +20,11 @@ void main(){
       default:
         print("Invalid choice. Please enter a valid option.");
     }
-  } while (choice != 2);
+  } while(choice != 2);
 
 //  2. Coin Toss Simulation (Guaranteed First Toss):
   Random random = Random();
   String result;
-
   do {
     // Simulating a coin toss
     result = tossCoin(random);
@@ -60,8 +52,7 @@ void main(){
   do {
     // Getting user's guess
     stdout.write("Guess the number between 1 and 10: ");
-    String? input = stdin.readLineSync();
-    guess = int.tryParse(input ?? '') ?? 0;
+    guess = int.parse(stdin.readLineSync()!);
 
     // Checking if the guess is correct
     if (guess == targetNumber) {
@@ -74,14 +65,10 @@ void main(){
 
   // 4. Simple Validation Loop:
    int age;
-
   do {
-    // Prompting the user for their age
+    
     stdout.write("Enter your age: ");
-    String? input = stdin.readLineSync();
-
-    // Parsing user input
-    age = int.tryParse(input ?? '') ?? -1;
+    age = int.parse(stdin.readLineSync()!);
 
     // Validating the age
     if (age < 0) {
@@ -91,7 +78,7 @@ void main(){
   print("Your age is: $age");
 
 // 5. Text Character Counting (Single Pass):
-   print('Enter a string:');
+   stdout.write('Enter a string:');
    String ?input = stdin.readLineSync();
 
   // Initialize maps to store frequency of characters

@@ -34,19 +34,26 @@ class _ViewTaskState extends State<ViewTask> {
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection("Notes").snapshots(),
-        builder:  (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
           if(snapshot.hasData)
           {
-            return ListView(
-              padding: EdgeInsets.all(10.0),  
-              children: snapshot.data!.docs.map((document){
-                return ListTile(
-                  leading: Image.network(document["fileurl"].toString()),
-                  title: Text(document["Title"].toString()),
-                  subtitle: Text(document["Remark"].toString()),
-                  trailing: IconButton(
+            if(snapshot.data!.size<=0){
+              return Center(
+                child: Text("No Data"),
+              );
+            }
+            else
+            {
+              return ListView.builder(
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (context, index) {
+                  var data = snapshot.data!.docs;
+                  return ListTile(
+                    title: Text(data[index]["Title"].toString()),
+                    subtitle: Text(data[index]["Remark"].toString()),
+                    trailing: IconButton(
                     onPressed: () async{
-                      var id = document.id.toString();
+                      var id = data[index].id.toString();
                       await FirebaseFirestore.instance.collection("Notes").doc(id).delete().then((value){
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
@@ -59,18 +66,53 @@ class _ViewTaskState extends State<ViewTask> {
                     },
                     icon: Icon(Icons.delete,color: Colors.red,),
                   ),
-                  onLongPress: () async{
-                     var updateid = document.id.toString();
+                   onLongPress: () async{
+                     var updateid = data[index].id.toString();
                     Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => EditScreen(
                        updateid: updateid,
                       ),),
                     );
                   },
+
+                  );
+                },
+              );
+            //   return ListView(
+            //   padding: EdgeInsets.all(10.0),  
+            //   children: snapshot.data!.docs.map((document){
+            //     return ListTile(
+            //       leading: Image.network(document["fileurl"].toString()),
+            //       title: Text(document["Title"].toString()),
+            //       subtitle: Text(document["Remark"].toString()),
+            //       trailing: IconButton(
+            //         onPressed: () async{
+            //           var id = document.id.toString();
+            //           await FirebaseFirestore.instance.collection("Notes").doc(id).delete().then((value){
+            //             ScaffoldMessenger.of(context).showSnackBar(
+            //               SnackBar(
+            //                 content: Text("Delete Notes Sucessfully"),
+            //                 backgroundColor: Colors.green,
+            //                 duration: Duration(seconds: 2),
+            //               )
+            //             );
+            //           });
+            //         },
+            //         icon: Icon(Icons.delete,color: Colors.red,),
+            //       ),
+            //       onLongPress: () async{
+            //          var updateid = document.id.toString();
+            //         Navigator.of(context).push(
+            //           MaterialPageRoute(builder: (context) => EditScreen(
+            //            updateid: updateid,
+            //           ),),
+            //         );
+            //       },
                  
-                );
-              }).toList(),
-            );
+            //     );
+            //   }).toList(),
+            // );
+            } 
           }
           else{
             return Center(

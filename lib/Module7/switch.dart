@@ -10,11 +10,13 @@ class SwitchExample extends StatefulWidget {
 
 class _SwitchExampleState extends State<SwitchExample> {
   bool isOn = true; 
+  var bg = Colors.white;
    List<String> switchLabels = ['Switch 1', 'Switch 2', 'Switch 3'];
   List<bool> switchValues = [false, true, false];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:bg ,
       body: ListView.builder(
         itemCount:switchLabels.length ,
         itemBuilder: (context, index) {

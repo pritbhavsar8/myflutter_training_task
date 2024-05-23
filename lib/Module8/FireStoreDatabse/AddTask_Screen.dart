@@ -18,8 +18,9 @@ class _AddTaskState extends State<AddTask> {
   TextEditingController _remark = TextEditingController();
   ImagePicker picker = ImagePicker();
   File? selectedfile;
+
   Widget button(){
-  return Container(
+   return Container(
     width: 300.0,
     child: ElevatedButton(
       style: ElevatedButton.styleFrom(
@@ -29,8 +30,28 @@ class _AddTaskState extends State<AddTask> {
           borderRadius: BorderRadius.circular(11.0)
         ),
       ),
-      onPressed: ()async{
-        if(selectedfile!= null) {
+      onPressed: () async {
+          // await FirebaseFirestore.instance.collection("Notes").add({ // in firestore database store data in form of collection and document 
+          //      "Title" : _title.text.toString(),
+          //      "Remark" : _remark.text.toString(),
+          //     //  "filename": filename,
+          //     //  "fileurl": fileurl
+          //   }).then((value) async{
+          //     await ScaffoldMessenger.of(context).showSnackBar(
+          //      SnackBar(
+          //      content: Text("Notes Add Sucessfully"),
+          //      backgroundColor: Colors.greenAccent.shade200,
+          //      duration: Duration(seconds: 2),
+          //     )
+          //   );
+          //    _title.text = "";
+          //    _remark.text = "";
+          //    Navigator.of(context).push(
+          //    MaterialPageRoute(builder: (context) => ViewTask(),)
+          //   );
+          // });
+        if(selectedfile != null) 
+        {
           var uuid = Uuid();
           var filename = uuid.v4();
           FirebaseStorage.instance.ref(filename).putFile(selectedfile!).whenComplete((){}).then((filedata) async{
@@ -93,18 +114,17 @@ class _AddTaskState extends State<AddTask> {
                             });
                           },
                          icon: Icon(Icons.camera_alt,size: 40.0,color: Colors.blue),
-                     ),
+                      ),
                       SizedBox(width: 10.0,),
                       IconButton(
                           onPressed: () async{
-                            XFile? photo = await picker.pickImage(source: ImageSource.gallery
-                            );
+                            XFile? photo = await picker.pickImage(source: ImageSource.gallery);
                             setState(() {
                               selectedfile = File(photo!.path);
                             });
                           },
                           icon: Icon(Icons.image,size: 40.0,color: Colors.blue)
-                      )
+                      ),
                     ],
                   ),
                SizedBox(height: 20.0,),   

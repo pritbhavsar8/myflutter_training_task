@@ -16,9 +16,9 @@ class _phoneAuthState extends State<phoneAuth> {
     TextEditingController _phoneAuth = TextEditingController();
     FirebaseAuth auth = FirebaseAuth.instance;
     var formkey = GlobalKey<FormState>();
-            Receive_otp(){
-                auth.verifyPhoneNumber(
-                  phoneNumber: "+91" + _phoneAuth.text.toString(),
+            Receive_otp() async{
+               await auth.verifyPhoneNumber(
+                  phoneNumber: "+91" + _phoneAuth.text,
                   verificationCompleted: (PhoneAuthCredential credential){},
                   verificationFailed: (FirebaseAuthException error){
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -29,14 +29,14 @@ class _phoneAuthState extends State<phoneAuth> {
                       )
                     );
                   },
-                  codeSent: (String verificationId, int? Retoken){
+                  codeSent: (String verificationId, int? Retoken){   // int? Retoken use when otp expire then again resend otp mate int? Retoken use thai che
                     Navigator.push(context,
                       MaterialPageRoute(builder: (context) => OtpScreen(
                         verificationid: verificationId,           
                       ),),
                     );
                   },
-                  codeAutoRetrievalTimeout: (e){
+                  codeAutoRetrievalTimeout: (e){   //codeAutoRetrievalTimeout fun when user na phone par moklelo otp expire thai jai pachi su funtinality karvi tena mate use thase
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(e.toString()),
