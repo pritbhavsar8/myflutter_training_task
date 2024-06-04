@@ -112,9 +112,9 @@ class MyApp extends StatelessWidget
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: ViewTask(),
+      home: phoneAuth(),
       routes: {
-        "/first":(context) => HomeScreen(),
+        "first":(context) => HomeScreen(),
         "/second":(context) => SettingScreeen(),
       },
     );

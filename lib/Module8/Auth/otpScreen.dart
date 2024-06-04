@@ -18,7 +18,7 @@ class _OtpScreenState extends State<OtpScreen> {
   TextEditingController _otp = TextEditingController();
    FirebaseAuth auth = FirebaseAuth.instance;
    var code = "";
-           varify() async{
+   varify() async{
               PhoneAuthCredential credential = PhoneAuthProvider.credential(
                  verificationId: widget.verificationid,
                  smsCode: code,

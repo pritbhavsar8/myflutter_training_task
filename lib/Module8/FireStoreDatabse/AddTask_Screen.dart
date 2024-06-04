@@ -31,54 +31,55 @@ class _AddTaskState extends State<AddTask> {
         ),
       ),
       onPressed: () async {
-          // await FirebaseFirestore.instance.collection("Notes").add({ // in firestore database store data in form of collection and document 
-          //      "Title" : _title.text.toString(),
-          //      "Remark" : _remark.text.toString(),
-          //     //  "filename": filename,
-          //     //  "fileurl": fileurl
-          //   }).then((value) async{
-          //     await ScaffoldMessenger.of(context).showSnackBar(
-          //      SnackBar(
-          //      content: Text("Notes Add Sucessfully"),
-          //      backgroundColor: Colors.greenAccent.shade200,
-          //      duration: Duration(seconds: 2),
-          //     )
-          //   );
-          //    _title.text = "";
-          //    _remark.text = "";
-          //    Navigator.of(context).push(
-          //    MaterialPageRoute(builder: (context) => ViewTask(),)
-          //   );
-          // });
-        if(selectedfile != null) 
-        {
-          var uuid = Uuid();
-          var filename = uuid.v4();
-          FirebaseStorage.instance.ref(filename).putFile(selectedfile!).whenComplete((){}).then((filedata) async{
-            await filedata.ref.getDownloadURL().then((fileurl) async {
-               await FirebaseFirestore.instance.collection("Notes").add({
+          await FirebaseFirestore.instance.collection("Notes").add({ // in firestore database store data in form of collection and document 
                "Title" : _title.text.toString(),
                "Remark" : _remark.text.toString(),
-               "filename": filename,
-               "fileurl": fileurl
+              //  "filename": filename,
+              //  "fileurl": fileurl
             }).then((value) async{
               await ScaffoldMessenger.of(context).showSnackBar(
                SnackBar(
                content: Text("Notes Add Sucessfully"),
-               backgroundColor: Colors.greenAccent.shade200,
-               duration: Duration(seconds: 2),
+               backgroundColor: Colors.green,
+               duration: Duration(seconds: 1),
               )
             );
              _title.text = "";
              _remark.text = "";
+             Navigator.of(context).pop();
              Navigator.of(context).push(
              MaterialPageRoute(builder: (context) => ViewTask(),)
             );
           });
+        // if(selectedfile != null) 
+        // {
+        //   var uuid = Uuid();
+        //   var filename = uuid.v4();
+        //   FirebaseStorage.instance.ref(filename).putFile(selectedfile!).whenComplete((){}).then((filedata) async{
+        //     await filedata.ref.getDownloadURL().then((fileurl) async {
+        //        await FirebaseFirestore.instance.collection("Notes").add({
+        //        "Title" : _title.text.toString(),
+        //        "Remark" : _remark.text.toString(),
+        //        "filename": filename,
+        //        "fileurl": fileurl
+        //     }).then((value) async{
+        //       await ScaffoldMessenger.of(context).showSnackBar(
+        //        SnackBar(
+        //        content: Text("Notes Add Sucessfully"),
+        //        backgroundColor: Colors.greenAccent.shade200,
+        //        duration: Duration(seconds: 2),
+        //       )
+        //     );
+        //      _title.text = "";
+        //      _remark.text = "";
+        //      Navigator.of(context).push(
+        //      MaterialPageRoute(builder: (context) => ViewTask(),)
+        //     );
+        //   });
 
-           });
-          });        
-        }
+        //    });
+        //   });        
+        // }
       },
       child: Text("Add"),
     ),

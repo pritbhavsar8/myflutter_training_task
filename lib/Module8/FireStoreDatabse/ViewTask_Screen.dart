@@ -23,6 +23,7 @@ class _ViewTaskState extends State<ViewTask> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: (){
+          Navigator.of(context).pop();
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => AddTask(),)
           );
