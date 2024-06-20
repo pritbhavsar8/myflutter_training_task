@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:myflutter_training_task/Module7/TabbarWithoutAppbar.dart';
 import 'package:myflutter_training_task/Module8/Auth/HomeScreen.dart';
 import 'package:myflutter_training_task/Module8/Auth/Login_With_google.dart';
 import 'package:myflutter_training_task/Module8/Auth/PhoneAuth.dart';
@@ -13,6 +14,7 @@ import 'package:myflutter_training_task/Module8/FireStoreDatabse/ViewTask_Screen
 import 'package:myflutter_training_task/Module8/RealTimeDatabase/ChatScreen.dart';
 import 'package:myflutter_training_task/Module8/RealTimeDatabase/addTask.dart';
 import 'package:myflutter_training_task/Module8/RealTimeDatabase/viewTask.dart';
+import 'package:myflutter_training_task/Module9/pageView.dart';
 import 'firebase_options.dart';
 import 'package:myflutter_training_task/Module5/Card.dart';
 import 'package:myflutter_training_task/Module5/Container.dart';
@@ -112,7 +114,7 @@ class MyApp extends StatelessWidget
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: phoneAuth(),
+      home: pageView(),
       routes: {
         "first":(context) => HomeScreen(),
         "/second":(context) => SettingScreeen(),

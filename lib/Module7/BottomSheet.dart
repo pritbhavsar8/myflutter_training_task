@@ -15,12 +15,12 @@ class _bottomSheetState extends State<bottomSheet> {
         child: ElevatedButton(
           onPressed: () {
             showModalBottomSheet(
-              backgroundColor: Colors.amber.shade100,
+              backgroundColor: Colors.amber,
               context: context, 
               builder: (BuildContext context) {
                 return SingleChildScrollView(
                   child: Container(
-                    height: 200, // Set the height as needed
+                    height: 400, // Set the height as needed
                     color: Colors.white,
                     child: Center(
                       child: Text(
