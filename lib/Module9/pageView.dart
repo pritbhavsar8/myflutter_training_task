@@ -40,6 +40,7 @@ class _pageViewState extends State<pageView> {
             fontSize: 14.0,
             fontFamily: "Rubik"
       ),),
+      SizedBox(height: 40.0,),
        row()
       ],
     );
@@ -74,6 +75,7 @@ class _pageViewState extends State<pageView> {
             fontSize: 14.0,
             fontFamily: "Rubik"
       ),),
+      SizedBox(height: 40.0,),
        row()
       ],
     );
@@ -108,6 +110,7 @@ class _pageViewState extends State<pageView> {
             fontSize: 14.0,
             fontFamily: "Rubik"
       ),),
+      SizedBox(height: 40.0,),
        row()
       ],
     );
@@ -116,22 +119,20 @@ class _pageViewState extends State<pageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: PageView(
-          children: [
-            page1(),
-            page2(),
-            page3(),
-          ],
-          scrollDirection: Axis.horizontal,
-          onPageChanged: (value) {
-            setState(() {
-              currentIndex = value;
-            });
-          },
-          // pageSnapping: false,
-        
-        ),
+      body: PageView(
+        children: [
+          page1(),
+          page2(),
+          page3(),
+        ],
+        scrollDirection: Axis.horizontal,
+        onPageChanged: (value) {
+          setState(() {
+            currentIndex = value;
+          });
+        },
+        pageSnapping: false, // pageSnapping false hase to jetlu swipe karsu tetlu swipe thase
+      
       ),
     );
   }
@@ -139,9 +140,9 @@ class _pageViewState extends State<pageView> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-      currentIndex==0?Icon(Icons.circle,size: 10.0,color: Colors.blue,):Icon(Icons.circle_outlined),
-      currentIndex==1?Icon(Icons.circle,size: 10.0,color: Colors.blue,):Icon(Icons.circle_outlined),
-      currentIndex==2?Icon(Icons.circle,size: 10.0,color: Colors.blue,):Icon(Icons.circle_outlined),
+      currentIndex==0?Icon(Icons.circle,size: 10.0,color: Colors.blue,):Icon(Icons.circle_outlined,size: 10.0,),
+      currentIndex==1?Icon(Icons.circle,size: 10.0,color: Colors.blue,):Icon(Icons.circle_outlined,size: 10.0,),
+      currentIndex==2?Icon(Icons.circle,size: 10.0,color: Colors.blue,):Icon(Icons.circle_outlined,size: 10.0,),
       ],
       
     );

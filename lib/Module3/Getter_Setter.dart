@@ -1,7 +1,10 @@
 void main()
 {
-Person person = Person();
-person._age = 43;
+Person person = Person("juhul",23);
+print(person.name);
+print(person.age);
+person.setage = 43;
+person.setname= "prit";
 print(person.age);
 
 Circle circle = Circle();
@@ -27,15 +30,22 @@ print("updated Grade ${student._grade}");
 // Simple Person Class with Encapsulation:
 class Person
 {
-  String name = "rohit";
-  int _age = 34;
-
-  set age(int new_age)
+  String _name;
+  int _age;
+  Person(this._name,this._age);
+  set setage(int new_age)
   {
   _age = new_age;
   }
  int get age{
    return _age;
+  }
+  set setname(String new_name)
+  {
+    _name = new_name;
+  }
+  String get name{
+    return _name;
   }
 }
 //  Circle with Radius and Calculated Area:

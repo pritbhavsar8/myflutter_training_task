@@ -14,6 +14,8 @@ import 'package:myflutter_training_task/Module8/FireStoreDatabse/ViewTask_Screen
 import 'package:myflutter_training_task/Module8/RealTimeDatabase/ChatScreen.dart';
 import 'package:myflutter_training_task/Module8/RealTimeDatabase/addTask.dart';
 import 'package:myflutter_training_task/Module8/RealTimeDatabase/viewTask.dart';
+import 'package:myflutter_training_task/Module9/CarouselSlider.dart';
+import 'package:myflutter_training_task/Module9/lottie.dart';
 import 'package:myflutter_training_task/Module9/pageView.dart';
 import 'firebase_options.dart';
 import 'package:myflutter_training_task/Module5/Card.dart';
@@ -114,7 +116,7 @@ class MyApp extends StatelessWidget
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: pageView(),
+      home: carouselSlider(),
       routes: {
         "first":(context) => HomeScreen(),
         "/second":(context) => SettingScreeen(),
