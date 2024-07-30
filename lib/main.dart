@@ -15,6 +15,7 @@ import 'package:myflutter_training_task/Module8/RealTimeDatabase/ChatScreen.dart
 import 'package:myflutter_training_task/Module8/RealTimeDatabase/addTask.dart';
 import 'package:myflutter_training_task/Module8/RealTimeDatabase/viewTask.dart';
 import 'package:myflutter_training_task/Module9/CarouselSlider.dart';
+import 'package:myflutter_training_task/Module9/Custom%20tab.dart';
 import 'package:myflutter_training_task/Module9/lottie.dart';
 import 'package:myflutter_training_task/Module9/pageView.dart';
 import 'firebase_options.dart';
@@ -113,10 +114,13 @@ class MyApp extends StatelessWidget
       debugShowCheckedModeBanner: false,
       title: 'Flutter tutorial',
       theme: ThemeData(
+        textTheme: TextTheme(
+
+        ),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: carouselSlider(),
+      home: CustomTab(),
       routes: {
         "first":(context) => HomeScreen(),
         "/second":(context) => SettingScreeen(),

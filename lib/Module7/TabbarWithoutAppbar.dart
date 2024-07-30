@@ -8,11 +8,11 @@ class tabWithoutAppbar extends StatefulWidget {
   State<tabWithoutAppbar> createState() => _tabWithoutAppbarState();
 }
 
-class _tabWithoutAppbarState extends State<tabWithoutAppbar> with TickerProviderStateMixin {
+class _tabWithoutAppbarState extends State<tabWithoutAppbar> with SingleTickerProviderStateMixin {
   
   @override
   Widget build(BuildContext context) {
-    TabController tabController = TabController(length: 3, vsync: this,initialIndex: 1);
+    TabController tabController = TabController(length: 3, vsync: this,initialIndex: 1,);
     return Scaffold(
       body: Column(
         children: [
